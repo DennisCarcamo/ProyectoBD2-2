@@ -42,7 +42,9 @@ public class Main extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Ta_tablasReplicandose = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
+        btn_limpiarSeleccion = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -97,7 +99,17 @@ public class Main extends javax.swing.JFrame {
         Ta_tablasReplicandose.setRows(5);
         jScrollPane2.setViewportView(Ta_tablasReplicandose);
 
-        jButton3.setText("Siendo Replicadas");
+        btn_limpiarSeleccion.setText("Limpiar ");
+        btn_limpiarSeleccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_limpiarSeleccionMouseClicked(evt);
+            }
+        });
+
+        jButton4.setText("Replicar");
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Tablas a replicar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,25 +125,42 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addGap(173, 173, 173)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(158, 158, 158))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(167, 167, 167)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1))
+                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(310, 310, 310))))
         );
 
         pack();
@@ -171,20 +200,44 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tb_SQLServertablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMousePressed
-        this.tablaSeleccionada = this.tb_SQLServertables.getSelectedRow();
+        this.tablaSeleccionada = Integer.parseInt(String.valueOf(this.tb_SQLServertables.getValueAt(this.tb_SQLServertables.getSelectedRow(),0)));
         System.out.println(tablaSeleccionada);
     }//GEN-LAST:event_tb_SQLServertablesMousePressed
 
     private void tb_SQLServertablesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMouseReleased
         String TextoAnteriorArea = this.Ta_tablasReplicandose.getText();
-        TextoAnteriorArea = TextoAnteriorArea.concat(this.tb_SQLServertables.getValueAt(tablaSeleccionada, 1).toString().concat("\n"));
+        TextoAnteriorArea = TextoAnteriorArea.concat(this.tb_SQLServertables.getValueAt(this.tb_SQLServertables.getSelectedRow(), 1).toString().concat("\n"));
         this.Ta_tablasReplicandose.setText(TextoAnteriorArea);
+        
+        Statement stmt;
+        try {
+            //tablaSeleccionada++;
+            stmt = conectSQL.createStatement();
+            stmt.executeQuery("Update tb_infotablas set tb_replicando = 1 \n" +
+            "where tb_id = "+tablaSeleccionada);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        
+        
     }//GEN-LAST:event_tb_SQLServertablesMouseReleased
 
     private void tb_SQLServertablesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMouseClicked
         this.tablaSeleccionada = this.tb_SQLServertables.getSelectedRow();
         // TODO add your handling code here:
     }//GEN-LAST:event_tb_SQLServertablesMouseClicked
+
+    private void btn_limpiarSeleccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_limpiarSeleccionMouseClicked
+        this.Ta_tablasReplicandose.setText("");
+        Statement stmt;
+        try {
+            stmt = conectSQL.createStatement();
+            stmt.executeQuery("Update tb_infotablas set tb_replicando = 0 \n" +
+            "where tb_replicando = 1");
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_btn_limpiarSeleccionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -239,7 +292,7 @@ public class Main extends javax.swing.JFrame {
 
     public static void ConectarseSQL() {
         try {
-            String connectionUrl = "jdbc:sqlserver://;database=test1;integratedSecurity=true;";
+            String connectionUrl = "jdbc:sqlserver://;database=Northwind;integratedSecurity=true;";
             conectSQL = (Connection) DriverManager.getConnection(connectionUrl);
             System.out.println("Conectado a SQL server");
         } catch (SQLException ex) {
@@ -260,12 +313,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     static Connection conectSQL, connectMySQL;
-    static int tablaSeleccionada = -1;
+    static int tablaSeleccionada=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Ta_tablasReplicandose;
+    private javax.swing.JButton btn_limpiarSeleccion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tb_SQLServertables;
