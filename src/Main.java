@@ -1,9 +1,12 @@
 
+import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -43,7 +46,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Ta_tablasReplicandose = new javax.swing.JTextArea();
         btn_limpiarSeleccion = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Btn_replicar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,7 +109,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Replicar");
+        Btn_replicar.setText("Replicar");
+        Btn_replicar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_replicarMouseClicked(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tablas a replicar");
@@ -131,7 +139,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_replicar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -157,7 +165,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Btn_replicar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)
                         .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(310, 310, 310))))
@@ -200,7 +208,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tb_SQLServertablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMousePressed
-        this.tablaSeleccionada = Integer.parseInt(String.valueOf(this.tb_SQLServertables.getValueAt(this.tb_SQLServertables.getSelectedRow(),0)));
+        this.tablaSeleccionada = Integer.parseInt(String.valueOf(this.tb_SQLServertables.getValueAt(this.tb_SQLServertables.getSelectedRow(), 0)));
         System.out.println(tablaSeleccionada);
     }//GEN-LAST:event_tb_SQLServertablesMousePressed
 
@@ -208,18 +216,18 @@ public class Main extends javax.swing.JFrame {
         String TextoAnteriorArea = this.Ta_tablasReplicandose.getText();
         TextoAnteriorArea = TextoAnteriorArea.concat(this.tb_SQLServertables.getValueAt(this.tb_SQLServertables.getSelectedRow(), 1).toString().concat("\n"));
         this.Ta_tablasReplicandose.setText(TextoAnteriorArea);
-        
+
         Statement stmt;
         try {
             //tablaSeleccionada++;
             stmt = conectSQL.createStatement();
-            stmt.executeQuery("Update tb_infotablas set tb_replicando = 1 \n" +
-            "where tb_id = "+tablaSeleccionada);
+            stmt.executeQuery("Update tb_infotablas set tb_replicando = 1 \n"
+                    + "where tb_id = " + tablaSeleccionada);
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-        
-        
+
+
     }//GEN-LAST:event_tb_SQLServertablesMouseReleased
 
     private void tb_SQLServertablesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMouseClicked
@@ -232,12 +240,87 @@ public class Main extends javax.swing.JFrame {
         Statement stmt;
         try {
             stmt = conectSQL.createStatement();
-            stmt.executeQuery("Update tb_infotablas set tb_replicando = 0 \n" +
-            "where tb_replicando = 1");
+            stmt.executeQuery("Update tb_infotablas set tb_replicando = 0 \n"
+                    + "where tb_replicando = 1");
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_btn_limpiarSeleccionMouseClicked
+
+    private void Btn_replicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_replicarMouseClicked
+        ArrayList<String> listatablasReplicandose = new ArrayList<String>();
+        String texto = this.Ta_tablasReplicandose.getText();
+        String[] lineas = texto.split("\n");
+        for (int i = 0; i < lineas.length; i++) {
+            listatablasReplicandose.add(lineas[i]);
+        }
+
+        for (int i = 0; i < listatablasReplicandose.size(); i++) {
+            System.out.println(listatablasReplicandose.get(i));
+            RevisarBitacora(listatablasReplicandose.get(i));
+        }
+    }//GEN-LAST:event_Btn_replicarMouseClicked
+
+    public static void RevisarBitacora(String nombreTabla) {
+        Date Fecha_local;
+        int Copied_local, oldValue_local, newValue_local, TableID_local;
+        String ActionType_local;
+        Statement stmt1, stmt2;
+
+        try {
+            stmt1 = conectSQL.createStatement();
+
+            ResultSet rsSQL1 = stmt1.executeQuery("Select * from TB_Bitacora where TableID = (Select tb_id From tb_infotablas where tb_nombre = '" + nombreTabla + "')");
+            while (rsSQL1.next()) {
+                Fecha_local = rsSQL1.getDate("Fecha");
+                Copied_local = rsSQL1.getInt("Copied");
+                oldValue_local = rsSQL1.getInt("oldValue");
+                newValue_local = rsSQL1.getInt("newValue");
+                TableID_local = rsSQL1.getInt("TableID");
+                ActionType_local = rsSQL1.getString("ActionType");
+                ActualizarDatos(Fecha_local, Copied_local, oldValue_local, newValue_local, TableID_local, ActionType_local, nombreTabla);
+
+                /*dataEntrante[0] = Fecha_local;
+                dataEntrante[1] = Copied_local;
+                dataEntrante[2] = oldValue_local;
+                dataEntrante[3] = newValue_local;
+                dataEntrante[4] = TableID_local;
+                dataEntrante[5] = ActionType_local;*/
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static void ActualizarDatos(Date Fecha, int Copied, int oldValue, int newValue, int TableID, String ActionType, String nombreTabla) {
+        Object dataEntrante[] = new Object[10];
+        try {
+            Statement stmt2 = connectMySQL.createStatement();
+            Statement stmt1 = conectSQL.createStatement();
+
+            if (Copied == 0 && ActionType.equals("insert")) {
+                if (nombreTabla.equals("Region")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from dbo.Region where RegionID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("RegionID");
+                        System.out.println(dataEntrante[0]);
+                        dataEntrante[1] = rsSQL2.getString("RegionDescription");
+                        System.out.println(dataEntrante[1]);
+                        stmt2.executeUpdate("insert into region(RegionID,RegionDescription) values (" + dataEntrante[0] + "," + dataEntrante[1]+ ");");
+                    }
+
+                }
+            } else if (Copied == 0 && ActionType == "Deleted") {
+
+            } else if (Copied == 0 && ActionType == "Update") {
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -305,7 +388,7 @@ public class Main extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Driver mySQL cargado");
-            connectMySQL = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?useTimezone=true&serverTimezone=UTC", "root", "1234");
+            connectMySQL = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind?useTimezone=true&serverTimezone=UTC", "root", "1234");
             System.out.println("Conectado a MySQL");
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.toString());
@@ -313,13 +396,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     static Connection conectSQL, connectMySQL;
-    static int tablaSeleccionada=0;
+    static int tablaSeleccionada = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_replicar;
     private javax.swing.JTextArea Ta_tablasReplicandose;
     private javax.swing.JButton btn_limpiarSeleccion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
