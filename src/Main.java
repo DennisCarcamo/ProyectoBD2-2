@@ -278,6 +278,7 @@ public class Main extends javax.swing.JFrame {
                 newValue_local = rsSQL1.getInt("newValue");
                 TableID_local = rsSQL1.getInt("TableID");
                 ActionType_local = rsSQL1.getString("ActionType");
+
                 ActualizarDatos(Fecha_local, Copied_local, oldValue_local, newValue_local, TableID_local, ActionType_local, nombreTabla);
 
                 /*dataEntrante[0] = Fecha_local;
@@ -294,12 +295,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     public static void ActualizarDatos(Date Fecha, int Copied, int oldValue, int newValue, int TableID, String ActionType, String nombreTabla) {
-        Object dataEntrante[] = new Object[10];
+        Object dataEntrante[] = new Object[100];
+        System.out.println(ActionType.toString());
         try {
             Statement stmt2 = connectMySQL.createStatement();
             Statement stmt1 = conectSQL.createStatement();
+            Statement stmt3 = conectSQL.createStatement();
 
-            if (Copied == 0 && ActionType.equals("insert")) {
+            if (Copied == 0 && (ActionType.equals("insert") || ActionType.equals("Update"))) {
                 if (nombreTabla.equals("Region")) {
                     ResultSet rsSQL2 = stmt1.executeQuery("Select * from dbo.Region where RegionID =" + newValue);
                     while (rsSQL2.next()) {
@@ -307,15 +310,311 @@ public class Main extends javax.swing.JFrame {
                         System.out.println(dataEntrante[0]);
                         dataEntrante[1] = rsSQL2.getString("RegionDescription");
                         System.out.println(dataEntrante[1]);
-                        stmt2.executeUpdate("insert into region(RegionID,RegionDescription) values (" + dataEntrante[0] + "," + dataEntrante[1]+ ");");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into region(RegionID,RegionDescription) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "');");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update region set RegionDescription='" + dataEntrante[1] + "' where RegionID= " + dataEntrante[0] + "  ");
+                        }
+
+                        //Le decimos a SQL que ese campo ya se ha copiado. 
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                    }
+
+                } else if (nombreTabla.equals("CustomerDemographics")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from CustomerDemographics where CustomerTypeID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getString("CustomerTypeID");
+                        System.out.println(dataEntrante[0]);
+                        dataEntrante[1] = rsSQL2.getString("CustomerDesc");
+                        System.out.println(dataEntrante[1]);
+                        stmt2.executeUpdate("insert into customerdemographics(CustomerTypeID,CustomerDesc) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "');");
+                        //Le decimos a SQL que ese campo ya se ha copiado. 
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                    }
+
+                } else if (nombreTabla.equals("Customers")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Customers where CustomerID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getString("CustomerID");
+                        dataEntrante[1] = rsSQL2.getString("CompanyName");
+                        dataEntrante[2] = rsSQL2.getString("ContactName");
+                        dataEntrante[3] = rsSQL2.getString("ContactTittle");
+                        dataEntrante[4] = rsSQL2.getString("Address");
+                        dataEntrante[5] = rsSQL2.getString("City");
+                        dataEntrante[6] = rsSQL2.getString("Region");
+                        dataEntrante[7] = rsSQL2.getString("PostalCode");
+                        dataEntrante[8] = rsSQL2.getString("Country");
+                        dataEntrante[9] = rsSQL2.getString("Phone");
+                        dataEntrante[10] = rsSQL2.getString("Fax");
+                        stmt2.executeUpdate("insert into region(CustomerID,CompanyName,ContactName,ContactTittle,Address,City,Region,PostalCode,Country,Phone,Fax)"
+                                + "values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "'"
+                                + ",'" + dataEntrante[5] + "','" + dataEntrante[6] + "','" + dataEntrante[7] + "','" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "');");
+                        //Le decimos a SQL que ese campo ya se ha copiado. 
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                    }
+
+                } else if (nombreTabla.equals("Employees")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Employees where EmployeeeID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("EmployeeID");
+                        dataEntrante[1] = rsSQL2.getString("LastName");
+                        dataEntrante[2] = rsSQL2.getString("FisrtName");
+                        dataEntrante[3] = rsSQL2.getString("Tittle");
+                        dataEntrante[4] = rsSQL2.getString("TitleOfCourtesy");
+                        dataEntrante[5] = rsSQL2.getDate("BirthDate");
+                        dataEntrante[6] = rsSQL2.getDate("HireDate");
+                        dataEntrante[7] = rsSQL2.getString("Address");
+                        dataEntrante[8] = rsSQL2.getString("City");
+                        dataEntrante[9] = rsSQL2.getString("Region");
+                        dataEntrante[10] = rsSQL2.getString("PostalCode");
+                        dataEntrante[11] = rsSQL2.getString("Country");
+                        dataEntrante[12] = rsSQL2.getString("HomePhone");
+                        dataEntrante[13] = rsSQL2.getString("Extension");
+                        dataEntrante[14] = rsSQL2.getString("Notes");
+                        dataEntrante[15] = rsSQL2.getString("ReportsTo");
+                        dataEntrante[16] = rsSQL2.getString("Region");
+                        dataEntrante[17] = rsSQL2.getString("PhotoPath");
+                        stmt2.executeUpdate("insert into employees(EmployeeID,LastName,FirstName,Tittle,Address,TittleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo,Photopath)"
+                                + "values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "'," + dataEntrante[5] + "," + dataEntrante[6] + ",'" + dataEntrante[7] + "',"
+                                + "'" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','" + dataEntrante[11] + "','" + dataEntrante[12] + "','" + dataEntrante[13] + "','" + dataEntrante[14] + "','" + dataEntrante[15] + "','" + dataEntrante[16] + "','" + dataEntrante[17] + "');");
+                        //Le decimos a SQL que ese campo ya se ha copiado. 
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                    }
+
+                } else if (nombreTabla.equals("OrderDetails")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from OrderDetails where OrderID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("OrderID");
+                        dataEntrante[1] = rsSQL2.getInt("ProductID");
+                        dataEntrante[2] = rsSQL2.getInt("UnitPrice");
+                        dataEntrante[3] = rsSQL2.getInt("Quantity");
+                        dataEntrante[4] = rsSQL2.getDouble("Discount");
+                        stmt2.executeUpdate("insert into orderdetails (OrderID,ProductID,UnitPrice,Quantity,Discount)"
+                                + "values(" + dataEntrante[0] + "," + dataEntrante[1] + "," + dataEntrante[2] + "," + dataEntrante[3] + "," + dataEntrante[4] + ");");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+
+                } else if (nombreTabla.equals("Categories")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Categories where CategoriesID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("CategoriesID");
+                        dataEntrante[1] = rsSQL2.getInt("CategoryName");
+                        dataEntrante[2] = rsSQL2.getInt("Description");
+                        stmt2.executeUpdate("insert into categories (CategoryID,CategoryName,Description) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "')");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+                } else if (nombreTabla.equals("CustomerCustomerDemo")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from CustomerCustomerDemo where CustomerID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getString("CustomerID");
+                        dataEntrante[1] = rsSQL2.getString("CustomerTypeID");
+                        stmt2.executeUpdate("insert into customercustomerdemo (CustomerID,CustomerTypeID) values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "')");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+                } else if (nombreTabla.equals("EmployeeTerritories")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from EmployeeTerritories where EmployeeID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("EmployeeID");
+                        dataEntrante[1] = rsSQL2.getString("TerritoryID");
+                        stmt2.executeUpdate("insert into employeeterritories (EmployeeID,TerritoryID) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "')");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+                } else if (nombreTabla.equals("Orders")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Orders where OrderID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("OrderID");
+                        dataEntrante[1] = rsSQL2.getString("CustomerID");
+                        dataEntrante[2] = rsSQL2.getInt("EmployeeID");
+                        dataEntrante[3] = rsSQL2.getDate("OrderDate");
+                        dataEntrante[4] = rsSQL2.getDate("RequiredDate");
+                        dataEntrante[5] = rsSQL2.getDate("ShippedDate");
+                        dataEntrante[6] = rsSQL2.getInt("ShipVia");
+                        dataEntrante[7] = rsSQL2.getDouble("Freight");
+                        dataEntrante[8] = rsSQL2.getString("ShipName");
+                        dataEntrante[9] = rsSQL2.getString("ShipAddress");
+                        dataEntrante[10] = rsSQL2.getString("ShipCity");
+                        dataEntrante[11] = rsSQL2.getString("ShipRegion");
+                        dataEntrante[12] = rsSQL2.getString("ShipPostalCode");
+                        dataEntrante[13] = rsSQL2.getString("ShipCountry");
+                        stmt2.executeUpdate("insert into orders (OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShipedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry) "
+                                + "values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "'," + dataEntrante[2] + "," + dataEntrante[3] + "," + dataEntrante[4] + ","
+                                + "" + dataEntrante[5] + "," + dataEntrante[5] + "," + dataEntrante[6] + "," + dataEntrante[7] + ",'" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','"
+                                + "" + dataEntrante[11] + "','" + dataEntrante[12] + "','" + dataEntrante[13] + "');");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+                } else if (nombreTabla.equals("Territories")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Territories where territoryID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getString("TerritoryID");
+                        dataEntrante[1] = rsSQL2.getString("TerritoryDescription");
+                        dataEntrante[2] = rsSQL2.getInt("RegionID");
+                        stmt2.executeUpdate("insert into territories (TerritoryID,TerritoryDescription,RegionID)values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "'," + dataEntrante[2] + ")");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                    }
+                } else if (nombreTabla.equals("Products")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Products where ProductID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("ProductID");
+                        dataEntrante[1] = rsSQL2.getString("ProductName");
+                        dataEntrante[2] = rsSQL2.getInt("SupplierID");
+                        dataEntrante[3] = rsSQL2.getInt("CategoryID");
+                        dataEntrante[4] = rsSQL2.getString("QuantityPerUnit");
+                        dataEntrante[5] = rsSQL2.getDouble("UnitPrice");
+                        dataEntrante[6] = rsSQL2.getInt("UnitsInStock");
+                        dataEntrante[7] = rsSQL2.getInt("UnitsOnOrder");
+                        dataEntrante[8] = rsSQL2.getInt("ReorderLevel");
+                        dataEntrante[9] = rsSQL2.getInt("Discontinued");
+                        stmt2.executeUpdate("insert into products(ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLeel,Discontinued)"
+                                + "values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "'," + dataEntrante[2] + "," + dataEntrante[3] + ",'" + dataEntrante[4] + "'," + dataEntrante[5] + "," + dataEntrante[6] + "," + dataEntrante[7] + "," + dataEntrante[8] + "," + dataEntrante[9] + "  )");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+                } else if (nombreTabla.equals("Shippers")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Shippers where ShipperID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("ShipperID");
+                        dataEntrante[1] = rsSQL2.getString("CompanyName");
+                        dataEntrante[2] = rsSQL2.getString("Phone");
+                        stmt2.executeUpdate("insert into shippers (shipperID,CompanyName,Phone)Values(" + dataEntrante[0] + "'," + dataEntrante[1] + "'," + dataEntrante[2] + ")");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
+                    }
+
+                } else if (nombreTabla.equals("Suppliers")) {
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Suppliers where SupplierID =" + newValue);
+                    while (rsSQL2.next()) {
+                        dataEntrante[0] = rsSQL2.getInt("SupplierID");
+                        dataEntrante[1] = rsSQL2.getString("CompanyName");
+                        dataEntrante[2] = rsSQL2.getString("ContactTitle");
+                        dataEntrante[3] = rsSQL2.getString("Address");
+                        dataEntrante[4] = rsSQL2.getString("City");
+                        dataEntrante[5] = rsSQL2.getString("Region");
+                        dataEntrante[6] = rsSQL2.getString("PostalCode");
+                        dataEntrante[7] = rsSQL2.getString("Country");
+                        dataEntrante[8] = rsSQL2.getString("ShipName");
+                        dataEntrante[9] = rsSQL2.getString("Phone");
+                        dataEntrante[10] = rsSQL2.getString("Fax");
+                        dataEntrante[11] = rsSQL2.getString("HomePage");
+                        stmt2.executeUpdate("insert into suppliers(SupplierID,CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,ShipName,Phone,Fax,HomePage)"
+                                + "values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "','" + dataEntrante[5] + "',"
+                                + "'" + dataEntrante[6] + "','" + dataEntrante[7] + "','" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','" + dataEntrante[11] + "'  )");
+                        stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+
                     }
 
                 }
-            } else if (Copied == 0 && ActionType == "Deleted") {
 
-            } else if (Copied == 0 && ActionType == "Update") {
-
+            } else if (Copied == 0 && ActionType.equals("Deleted")) {
+                if (nombreTabla.equals("Region")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE region DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM region where regionID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE region ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Categories")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE categories DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM categories where CategoriID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE categories ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("CustomerCustomerDemo")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE custoercustomerdemo DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM customercustomerdemo where CustomerID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE customercustomerdemo ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("CustomerDemographics")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE customerdemographics DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM customerdemographicsn where CutomerTypeID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE customerdemographics ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Customers")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE customers DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM customers where CutomerID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE customers ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Employees")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE employess DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM employees where EmployeeID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE employees ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("EmployeeTerritories")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE employessterritories DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM employessterritories where EmployeeID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE employessterritories ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("OrderDetails")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE orderdetails DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM orderdetails where OrderID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE orderdetails ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Orders")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE orderdetails DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM orderdetails where OrderID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE orderdetails ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Products")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE products DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM products where ProductID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE products ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Suppliers")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE suppliers DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM suppliers where SupplierID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE supliers ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Territories")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE territories DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM territories where TerritoryID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE territories ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                } else if (nombreTabla.equals("Shippers")) {
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                    stmt2.executeUpdate("ALTER TABLE shippers DISABLE KEYS;");
+                    stmt2.executeUpdate("DELETE FROM shippers where ShipperID =" + oldValue + ";");
+                    stmt2.executeUpdate("ALTER TABLE shipers ENABLE KEYS;");
+                    stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                }
             }
+            /*else if (Copied == 0 && ActionType.equals("Update")) {
+                ResultSet rsSQL2 = stmt1.executeQuery("Select * from Region where RegionID=" + newValue);
+                while (rsSQL2.next()) {
+                    System.out.println("aqui 3");
+                    dataEntrante[0] = rsSQL2.getInt("RegionID");
+                    dataEntrante[1] = rsSQL2.getString("RegionDescription");
+                    stmt2.executeUpdate("UPDATE region SET RegionDescription = '" + dataEntrante[1] + "' where RegionID=" + newValue + ";");
+                    //Le decimos a SQL que ese campo ya se ha copiado. 
+                    stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
+                }
+            }*/
+
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -336,16 +635,24 @@ public class Main extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -355,8 +662,10 @@ public class Main extends javax.swing.JFrame {
                 Main.ConectarseSQL();
                 try {
                     Main.ConectarseMySQL();
+
                 } catch (SQLException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Main.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 new Main().setVisible(true);
             }
