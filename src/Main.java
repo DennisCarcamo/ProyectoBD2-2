@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -39,15 +41,38 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        tf_nombreuserMySQL = new javax.swing.JTextField();
+        tf_nombrebdSql = new javax.swing.JTextField();
+        btn_probarSQL = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        pf_passwordSql = new javax.swing.JPasswordField();
+        btn_probarMySQL = new javax.swing.JButton();
+        tf_nombreuserSql = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        pf_PassMySQL = new javax.swing.JPasswordField();
+        tf_instanciaMySQL = new javax.swing.JTextField();
+        tf_instanciaSQL = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        tf_nombrebdMySQL = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        Panel_operaciones = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_SQLServertables = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Ta_tablasReplicandose = new javax.swing.JTextArea();
         btn_limpiarSeleccion = new javax.swing.JButton();
         Btn_replicar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -58,6 +83,154 @@ public class Main extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+
+        btn_probarSQL.setText("Probrar");
+        btn_probarSQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_probarSQLMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("Nombre Usuario");
+
+        jLabel8.setText("Nombre Usuario");
+
+        btn_probarMySQL.setText("Probar");
+        btn_probarMySQL.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                btn_probarMySQLMouseDragged(evt);
+            }
+        });
+
+        jLabel9.setText("Password");
+
+        jLabel5.setText("Password");
+
+        jLabel2.setText("Instancia");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("SQL Server A MySQL");
+
+        jLabel6.setText("Instancia");
+
+        jLabel3.setText("Nombre de La base de Datos");
+
+        jLabel7.setText("Nombre de La base de Datos");
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Parametros de conneccion para mySQL");
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Parametros de conneccion para SQLServer");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tf_instanciaSQL, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(92, 92, 92)
+                                            .addComponent(jLabel5)))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(pf_passwordSql)
+                                        .addComponent(tf_nombreuserSql, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tf_nombrebdSql, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(btn_probarSQL, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_nombrebdMySQL)
+                                    .addComponent(tf_instanciaMySQL)
+                                    .addComponent(tf_nombreuserMySQL)
+                                    .addComponent(pf_PassMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(btn_probarMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(287, 287, 287))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(307, 307, 307)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel1)
+                .addGap(86, 86, 86)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(tf_instanciaSQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tf_nombrebdSql, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(tf_nombreuserSql, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(109, 109, 109)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_probarSQL, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_probarMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(tf_instanciaMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(tf_nombrebdMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(tf_nombreuserMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(pf_PassMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pf_passwordSql, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(101, 101, 101)))
+                .addContainerGap(143, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Home", jPanel1);
+
+        Panel_operaciones.setEnabled(false);
 
         tb_SQLServertables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,15 +261,6 @@ public class Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_SQLServertables);
 
-        jButton1.setText("Cargar la data");
-
-        jButton2.setText("Cargar tablas SQL Server");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         Ta_tablasReplicandose.setEditable(false);
         Ta_tablasReplicandose.setColumns(20);
         Ta_tablasReplicandose.setRows(5);
@@ -116,87 +280,80 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tablas a replicar");
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Tablas a replicar");
+
+        jButton2.setText("Cargar tablas SQL Server");
+        jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_operacionesLayout = new javax.swing.GroupLayout(Panel_operaciones);
+        Panel_operaciones.setLayout(Panel_operacionesLayout);
+        Panel_operacionesLayout.setHorizontalGroup(
+            Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_operacionesLayout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addGroup(Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_operacionesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(Panel_operacionesLayout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(173, 173, 173)))
+                .addGroup(Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_replicar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+        Panel_operacionesLayout.setVerticalGroup(
+            Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_operacionesLayout.createSequentialGroup()
+                .addContainerGap(172, Short.MAX_VALUE)
+                .addGroup(Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGroup(Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_operacionesLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(Panel_operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_operacionesLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(Btn_replicar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(165, 165, 165))
+        );
+
+        jTabbedPane1.addTab("Work Area", Panel_operaciones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(173, 173, 173)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Btn_replicar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(106, 106, 106))))
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
-                    .addComponent(jButton2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(Btn_replicar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(btn_limpiarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(310, 310, 310))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Statement stmt;
-        Object dataEntrante[] = new Object[3];
-        String tb_nombre;
-        int tb_id;
-        this.limpiartabla1();
-        DefaultTableModel tabla1 = (DefaultTableModel) this.tb_SQLServertables.getModel();
-        try {
-            stmt = conectSQL.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from tb_infotablas");
-            while (rs.next()) {
-                tb_id = rs.getInt("tb_id");
-                tb_nombre = rs.getString("tb_nombre");
-                dataEntrante[0] = tb_id;
-                dataEntrante[1] = tb_nombre;
-                dataEntrante[2] = 0;
-                tabla1.addRow(dataEntrante);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
@@ -206,6 +363,34 @@ public class Main extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.limpiartabla1();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btn_probarSQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_probarSQLMouseClicked
+        String instancia = this.tf_instanciaSQL.getText();
+        String DBnombre = this.tf_nombrebdSql.getText();
+        String Username = this.tf_nombreuserSql.getText();
+        String Password;
+        Password = this.pf_passwordSql.getText();
+        ConectarseSQL(instancia, DBnombre, Username, Password);
+    }//GEN-LAST:event_btn_probarSQLMouseClicked
+
+    private void btn_probarMySQLMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_probarMySQLMouseDragged
+        String instancia = this.tf_instanciaMySQL.getText();
+        String DBnombre = this.tf_nombrebdMySQL.getText();
+        String Username = this.tf_nombreuserMySQL.getText();
+        String Password;
+        Password = this.pf_PassMySQL.getText();
+        try {
+            ConectarseMySQL(instancia, DBnombre, Username, Password);
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btn_probarMySQLMouseDragged
+
+    private void tb_SQLServertablesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMouseClicked
+        this.tablaSeleccionada = this.tb_SQLServertables.getSelectedRow();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_SQLServertablesMouseClicked
 
     private void tb_SQLServertablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMousePressed
         this.tablaSeleccionada = Integer.parseInt(String.valueOf(this.tb_SQLServertables.getValueAt(this.tb_SQLServertables.getSelectedRow(), 0)));
@@ -226,40 +411,66 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-
-
     }//GEN-LAST:event_tb_SQLServertablesMouseReleased
 
-    private void tb_SQLServertablesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SQLServertablesMouseClicked
-        this.tablaSeleccionada = this.tb_SQLServertables.getSelectedRow();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tb_SQLServertablesMouseClicked
-
     private void btn_limpiarSeleccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_limpiarSeleccionMouseClicked
-        this.Ta_tablasReplicandose.setText("");
+        SetAlltonotReplicando();
+
+    }//GEN-LAST:event_btn_limpiarSeleccionMouseClicked
+    private void SetAlltonotReplicando() {
+        try {
+            this.Ta_tablasReplicandose.setText("");
+            Statement stmt;
+            try {
+                stmt = conectSQL.createStatement();
+                stmt.executeQuery("Update tb_infotablas set tb_replicando = 0 \n"
+                        + "where tb_replicando = 1");
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+
+        } catch (Exception e) {
+        }
+    }
+    private void Btn_replicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_replicarMouseClicked
+        try {
+            ArrayList<String> listatablasReplicandose = new ArrayList<String>();
+            String texto = this.Ta_tablasReplicandose.getText();
+            String[] lineas = texto.split("\n");
+            for (int i = 0; i < lineas.length; i++) {
+                listatablasReplicandose.add(lineas[i]);
+            }
+
+            for (int i = 0; i < listatablasReplicandose.size(); i++) {
+                System.out.println(listatablasReplicandose.get(i));
+                RevisarBitacora(listatablasReplicandose.get(i));
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_Btn_replicarMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Statement stmt;
+        Object dataEntrante[] = new Object[3];
+        String tb_nombre;
+        int tb_id;
+        this.limpiartabla1();
+        DefaultTableModel tabla1 = (DefaultTableModel) this.tb_SQLServertables.getModel();
         try {
             stmt = conectSQL.createStatement();
-            stmt.executeQuery("Update tb_infotablas set tb_replicando = 0 \n"
-                    + "where tb_replicando = 1");
+            ResultSet rs = stmt.executeQuery("Select * from tb_infotablas");
+            while (rs.next()) {
+                tb_id = rs.getInt("tb_id");
+                tb_nombre = rs.getString("tb_nombre");
+                dataEntrante[0] = tb_id;
+                dataEntrante[1] = tb_nombre;
+                tabla1.addRow(dataEntrante);
+            }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-    }//GEN-LAST:event_btn_limpiarSeleccionMouseClicked
-
-    private void Btn_replicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_replicarMouseClicked
-        ArrayList<String> listatablasReplicandose = new ArrayList<String>();
-        String texto = this.Ta_tablasReplicandose.getText();
-        String[] lineas = texto.split("\n");
-        for (int i = 0; i < lineas.length; i++) {
-            listatablasReplicandose.add(lineas[i]);
-        }
-
-        for (int i = 0; i < listatablasReplicandose.size(); i++) {
-            System.out.println(listatablasReplicandose.get(i));
-            RevisarBitacora(listatablasReplicandose.get(i));
-        }
-    }//GEN-LAST:event_Btn_replicarMouseClicked
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void RevisarBitacora(String nombreTabla) {
         Date Fecha_local;
@@ -327,7 +538,14 @@ public class Main extends javax.swing.JFrame {
                         System.out.println(dataEntrante[0]);
                         dataEntrante[1] = rsSQL2.getString("CustomerDesc");
                         System.out.println(dataEntrante[1]);
-                        stmt2.executeUpdate("insert into customerdemographics(CustomerTypeID,CustomerDesc) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "');");
+
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into customerdemographics(CustomerTypeID,CustomerDesc) values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "');");
+
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update customerdemographics set CustomerDesc='" + dataEntrante[1] + "'Where CustomerTypeID='" + dataEntrante[0] + "';");
+
+                        }
                         //Le decimos a SQL que ese campo ya se ha copiado. 
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
                     }
@@ -346,9 +564,17 @@ public class Main extends javax.swing.JFrame {
                         dataEntrante[8] = rsSQL2.getString("Country");
                         dataEntrante[9] = rsSQL2.getString("Phone");
                         dataEntrante[10] = rsSQL2.getString("Fax");
-                        stmt2.executeUpdate("insert into region(CustomerID,CompanyName,ContactName,ContactTittle,Address,City,Region,PostalCode,Country,Phone,Fax)"
-                                + "values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "'"
-                                + ",'" + dataEntrante[5] + "','" + dataEntrante[6] + "','" + dataEntrante[7] + "','" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "');");
+
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into customers(CustomerID,CompanyName,ContactName,ContactTittle,Address,City,Region,PostalCode,Country,Phone,Fax)"
+                                    + "values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "'"
+                                    + ",'" + dataEntrante[5] + "','" + dataEntrante[6] + "','" + dataEntrante[7] + "','" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "');");
+
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update customers set CompanyName='" + dataEntrante[1] + "',ContactName='" + dataEntrante[2] + "',ContactTittle='" + dataEntrante[3] + "',Address='" + dataEntrante[4] + "',City='" + dataEntrante[5] + "',"
+                                    + "Region='" + dataEntrante[6] + "',PostalCode='" + dataEntrante[7] + "',Country='" + dataEntrante[8] + "',Phone='" + dataEntrante[9] + "',Fax='" + dataEntrante[10] + "' where CustomerID='" + dataEntrante[0] + "'");
+                        }
+
                         //Le decimos a SQL que ese campo ya se ha copiado. 
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
                     }
@@ -359,7 +585,7 @@ public class Main extends javax.swing.JFrame {
                         dataEntrante[0] = rsSQL2.getInt("EmployeeID");
                         dataEntrante[1] = rsSQL2.getString("LastName");
                         dataEntrante[2] = rsSQL2.getString("FisrtName");
-                        dataEntrante[3] = rsSQL2.getString("Tittle");
+                        dataEntrante[3] = rsSQL2.getString("Title");
                         dataEntrante[4] = rsSQL2.getString("TitleOfCourtesy");
                         dataEntrante[5] = rsSQL2.getDate("BirthDate");
                         dataEntrante[6] = rsSQL2.getDate("HireDate");
@@ -372,36 +598,58 @@ public class Main extends javax.swing.JFrame {
                         dataEntrante[13] = rsSQL2.getString("Extension");
                         dataEntrante[14] = rsSQL2.getString("Notes");
                         dataEntrante[15] = rsSQL2.getString("ReportsTo");
-                        dataEntrante[16] = rsSQL2.getString("Region");
-                        dataEntrante[17] = rsSQL2.getString("PhotoPath");
-                        stmt2.executeUpdate("insert into employees(EmployeeID,LastName,FirstName,Tittle,Address,TittleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo,Photopath)"
-                                + "values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "'," + dataEntrante[5] + "," + dataEntrante[6] + ",'" + dataEntrante[7] + "',"
-                                + "'" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','" + dataEntrante[11] + "','" + dataEntrante[12] + "','" + dataEntrante[13] + "','" + dataEntrante[14] + "','" + dataEntrante[15] + "','" + dataEntrante[16] + "','" + dataEntrante[17] + "');");
-                        //Le decimos a SQL que ese campo ya se ha copiado. 
+
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into employees(EmployeeID,LastName,FirstName,Title,TitleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo,Photopath)"
+                                    + "values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "'," + dataEntrante[5] + "," + dataEntrante[6] + ",'" + dataEntrante[7] + "',"
+                                    + "'" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','" + dataEntrante[11] + "','" + dataEntrante[12] + "','" + dataEntrante[13] + "','" + dataEntrante[14] + "','" + dataEntrante[15] + "','" + dataEntrante[16] + "');");
+
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update employees set Lastname='" + dataEntrante[1] + "',FirstName='" + dataEntrante[2] + "',Title='" + dataEntrante[3] + "',TitleOfCourtesy='" + dataEntrante[4] + "',"
+                                    + "',BirthDate=" + dataEntrante[5] + ",HireDate=" + dataEntrante[6] + "',Address='" + dataEntrante[7] + ",City='" + dataEntrante[8] + "',Region='" + dataEntrante[9] + "',PostalCode='" + dataEntrante[10]
+                                    + "',Country='" + dataEntrante[11] + "',HomePhone='" + dataEntrante[12] + "',Extension='" + dataEntrante[13] + "',Notes='" + dataEntrante[14] + "ReportsTo='" + dataEntrante[15] + "' where CustomerID='" + dataEntrante[0] + "'");
+
+                        }
+
+//Le decimos a SQL que ese campo ya se ha copiado. 
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
                     }
 
-                } else if (nombreTabla.equals("OrderDetails")) {
+                } else if (nombreTabla.equals("Order Details")) {
                     ResultSet rsSQL2 = stmt1.executeQuery("Select * from OrderDetails where OrderID =" + newValue);
                     while (rsSQL2.next()) {
                         dataEntrante[0] = rsSQL2.getInt("OrderID");
                         dataEntrante[1] = rsSQL2.getInt("ProductID");
-                        dataEntrante[2] = rsSQL2.getInt("UnitPrice");
+                        dataEntrante[2] = rsSQL2.getDouble("UnitPrice");
                         dataEntrante[3] = rsSQL2.getInt("Quantity");
                         dataEntrante[4] = rsSQL2.getDouble("Discount");
-                        stmt2.executeUpdate("insert into orderdetails (OrderID,ProductID,UnitPrice,Quantity,Discount)"
-                                + "values(" + dataEntrante[0] + "," + dataEntrante[1] + "," + dataEntrante[2] + "," + dataEntrante[3] + "," + dataEntrante[4] + ");");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+                            stmt2.executeUpdate("ALTER TABLE orderdetails DISABLE KEYS;");
+                            stmt2.executeUpdate("insert into orderdetails (OrderID,ProductID,UnitPrice,Quantity,Discount)"
+                                    + "values(" + dataEntrante[0] + "," + dataEntrante[1] + "," + dataEntrante[2] + "," + dataEntrante[3] + "," + dataEntrante[4] + ");");
+                            stmt2.executeUpdate("ALTER TABLE orderdetails ENABLE KEYS;");
+                            stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update orderdetalis set ProductId=" + dataEntrante[1] + ", UnitPrice=" + dataEntrante[2] + ", Quantity=" + dataEntrante[3] + ", Discount=" + dataEntrante[4] + "' where OrderID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
 
                 } else if (nombreTabla.equals("Categories")) {
-                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Categories where CategoriesID =" + newValue);
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Categories where CategoryID =" + newValue);
                     while (rsSQL2.next()) {
-                        dataEntrante[0] = rsSQL2.getInt("CategoriesID");
-                        dataEntrante[1] = rsSQL2.getInt("CategoryName");
-                        dataEntrante[2] = rsSQL2.getInt("Description");
-                        stmt2.executeUpdate("insert into categories (CategoryID,CategoryName,Description) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "')");
+                        dataEntrante[0] = rsSQL2.getInt("CategoryID");
+                        dataEntrante[1] = rsSQL2.getString("CategoryName");
+                        dataEntrante[2] = rsSQL2.getString("Description");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into categories (CategoryID,CategoryName,Description) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "')");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update categories set CategoryName='" + dataEntrante[1] + "',Description='" + dataEntrante[3] + "' where CategoryID=" + dataEntrante[0] + " ");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
@@ -410,7 +658,12 @@ public class Main extends javax.swing.JFrame {
                     while (rsSQL2.next()) {
                         dataEntrante[0] = rsSQL2.getString("CustomerID");
                         dataEntrante[1] = rsSQL2.getString("CustomerTypeID");
-                        stmt2.executeUpdate("insert into customercustomerdemo (CustomerID,CustomerTypeID) values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "')");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into customercustomerdemo (CustomerID,CustomerTypeID) values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "')");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update customercustomerdemo set CustomerTypeID=" + dataEntrante[1] + "' where CustomerID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
@@ -419,7 +672,12 @@ public class Main extends javax.swing.JFrame {
                     while (rsSQL2.next()) {
                         dataEntrante[0] = rsSQL2.getInt("EmployeeID");
                         dataEntrante[1] = rsSQL2.getString("TerritoryID");
-                        stmt2.executeUpdate("insert into employeeterritories (EmployeeID,TerritoryID) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "')");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into employeeterritories (EmployeeID,TerritoryID) values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "')");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update employeeterritories set TerritoryID=" + dataEntrante[1] + "' where EmployeeID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
@@ -440,20 +698,32 @@ public class Main extends javax.swing.JFrame {
                         dataEntrante[11] = rsSQL2.getString("ShipRegion");
                         dataEntrante[12] = rsSQL2.getString("ShipPostalCode");
                         dataEntrante[13] = rsSQL2.getString("ShipCountry");
-                        stmt2.executeUpdate("insert into orders (OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShipedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry) "
-                                + "values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "'," + dataEntrante[2] + "," + dataEntrante[3] + "," + dataEntrante[4] + ","
-                                + "" + dataEntrante[5] + "," + dataEntrante[5] + "," + dataEntrante[6] + "," + dataEntrante[7] + ",'" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','"
-                                + "" + dataEntrante[11] + "','" + dataEntrante[12] + "','" + dataEntrante[13] + "');");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into orders (OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShipedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry) "
+                                    + "values (" + dataEntrante[0] + ",'" + dataEntrante[1] + "'," + dataEntrante[2] + "," + dataEntrante[3] + "," + dataEntrante[4] + ","
+                                    + "" + dataEntrante[5] + "," + dataEntrante[5] + "," + dataEntrante[6] + "," + dataEntrante[7] + ",'" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','"
+                                    + "" + dataEntrante[11] + "','" + dataEntrante[12] + "','" + dataEntrante[13] + "');");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update order set CustomerID=" + dataEntrante[1] + ",EmployeeID=" + dataEntrante[2] + ",OrderID='" + dataEntrante[3] + "',RequiredDate='" + dataEntrante[4]
+                                    + "',ShippedDate='" + dataEntrante[5] + "',ShipVia=" + dataEntrante[6] + ",Freight=" + dataEntrante[7] + ",ShipName='" + dataEntrante[8] + ",ShipAddress='" + dataEntrante[9]
+                                    + "',ShipCity='" + dataEntrante[10] + ",ShipRegion='" + dataEntrante[11] + ",ShipPostalCode='" + dataEntrante[12] + "',ShipCountry='" + dataEntrante[13] + "' where OrderID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
                 } else if (nombreTabla.equals("Territories")) {
-                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Territories where territoryID =" + newValue);
+                    ResultSet rsSQL2 = stmt1.executeQuery("Select * from Territories where TerritoryID =" + newValue);
                     while (rsSQL2.next()) {
                         dataEntrante[0] = rsSQL2.getString("TerritoryID");
                         dataEntrante[1] = rsSQL2.getString("TerritoryDescription");
                         dataEntrante[2] = rsSQL2.getInt("RegionID");
-                        stmt2.executeUpdate("insert into territories (TerritoryID,TerritoryDescription,RegionID)values ('" + dataEntrante[0] + "','" + dataEntrante[1] + "'," + dataEntrante[2] + ")");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into territories(TerritoryID,TerritoryDescription,RegionID) values('" + dataEntrante[0] + "','" + dataEntrante[1] + "'," + dataEntrante[2] + ")");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update territories set TerritoryDescription='" + dataEntrante[1] + "',RegionID='" + dataEntrante[2] + "' where TerritoryID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
                     }
                 } else if (nombreTabla.equals("Products")) {
@@ -469,8 +739,14 @@ public class Main extends javax.swing.JFrame {
                         dataEntrante[7] = rsSQL2.getInt("UnitsOnOrder");
                         dataEntrante[8] = rsSQL2.getInt("ReorderLevel");
                         dataEntrante[9] = rsSQL2.getInt("Discontinued");
-                        stmt2.executeUpdate("insert into products(ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLeel,Discontinued)"
-                                + "values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "'," + dataEntrante[2] + "," + dataEntrante[3] + ",'" + dataEntrante[4] + "'," + dataEntrante[5] + "," + dataEntrante[6] + "," + dataEntrante[7] + "," + dataEntrante[8] + "," + dataEntrante[9] + "  )");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into products(ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued)"
+                                    + "values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "'," + dataEntrante[2] + "," + dataEntrante[3] + ",'" + dataEntrante[4] + "'," + dataEntrante[5] + "," + dataEntrante[6] + "," + dataEntrante[7] + "," + dataEntrante[8] + "," + dataEntrante[9] + "  )");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update products set ProductName='" + dataEntrante[1] + "',SupplierID=" + dataEntrante[2] + ",CategoryID=" + dataEntrante[3] + ",QuantityPerUnit=" + dataEntrante[4]
+                                    + ",UnitPrice=" + dataEntrante[5] + ",UnitsInStock=" + dataEntrante[6] + ",UnitsOnOrder=" + dataEntrante[7] + ",ReorderLevel=" + dataEntrante[8] + ",Discontinued=" + dataEntrante[9] + " where ProductID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
@@ -480,7 +756,12 @@ public class Main extends javax.swing.JFrame {
                         dataEntrante[0] = rsSQL2.getInt("ShipperID");
                         dataEntrante[1] = rsSQL2.getString("CompanyName");
                         dataEntrante[2] = rsSQL2.getString("Phone");
-                        stmt2.executeUpdate("insert into shippers (shipperID,CompanyName,Phone)Values(" + dataEntrante[0] + "'," + dataEntrante[1] + "'," + dataEntrante[2] + ")");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into shippers (shipperID,CompanyName,Phone)Values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "')");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update shippers set CompanyName='" + dataEntrante[1] + "',Phone='" + dataEntrante[2] + "' where ShipperID=" + dataEntrante[0] + "");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
@@ -490,19 +771,27 @@ public class Main extends javax.swing.JFrame {
                     while (rsSQL2.next()) {
                         dataEntrante[0] = rsSQL2.getInt("SupplierID");
                         dataEntrante[1] = rsSQL2.getString("CompanyName");
-                        dataEntrante[2] = rsSQL2.getString("ContactTitle");
-                        dataEntrante[3] = rsSQL2.getString("Address");
-                        dataEntrante[4] = rsSQL2.getString("City");
-                        dataEntrante[5] = rsSQL2.getString("Region");
-                        dataEntrante[6] = rsSQL2.getString("PostalCode");
-                        dataEntrante[7] = rsSQL2.getString("Country");
-                        dataEntrante[8] = rsSQL2.getString("ShipName");
+                        dataEntrante[2] = rsSQL2.getString("ContactName");
+                        dataEntrante[3] = rsSQL2.getString("ContactTitle");
+                        dataEntrante[4] = rsSQL2.getString("Address");
+                        dataEntrante[5] = rsSQL2.getString("City");
+                        dataEntrante[6] = rsSQL2.getString("Region");
+                        dataEntrante[7] = rsSQL2.getString("PostalCode");
+                        dataEntrante[8] = rsSQL2.getString("Country");
                         dataEntrante[9] = rsSQL2.getString("Phone");
                         dataEntrante[10] = rsSQL2.getString("Fax");
                         dataEntrante[11] = rsSQL2.getString("HomePage");
-                        stmt2.executeUpdate("insert into suppliers(SupplierID,CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,ShipName,Phone,Fax,HomePage)"
-                                + "values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "','" + dataEntrante[5] + "',"
-                                + "'" + dataEntrante[6] + "','" + dataEntrante[7] + "','" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','" + dataEntrante[11] + "'  )");
+                        if (ActionType.equals("insert")) {
+                            stmt2.executeUpdate("insert into suppliers(SupplierID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax,HomePage)"
+                                    + "values(" + dataEntrante[0] + ",'" + dataEntrante[1] + "','" + dataEntrante[2] + "','" + dataEntrante[3] + "','" + dataEntrante[4] + "','" + dataEntrante[5] + "',"
+                                    + "'" + dataEntrante[6] + "','" + dataEntrante[7] + "','" + dataEntrante[8] + "','" + dataEntrante[9] + "','" + dataEntrante[10] + "','" + dataEntrante[11] + "'  )");
+                        } else if (ActionType.equals("Update")) {
+                            stmt2.executeUpdate("Update suppliers set CompanyName='" + dataEntrante[1] + "',ContactName='" + dataEntrante[2] + "',ContactTitle='" + dataEntrante[3] + "',Address='" + dataEntrante[4] + "',City='" + dataEntrante[5]
+                                    + "',Region='" + dataEntrante[6] + "',PostalCode='" + dataEntrante[7] + "',Country='" + dataEntrante[8]
+                                    + "',Phone='" + dataEntrante[9] + "',Fax='" + dataEntrante[10] + "',HomePage"
+                                    + "='" + dataEntrante[11] + "' where SupplierID='" + dataEntrante[0] + "'");
+                        }
+
                         stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
 
                     }
@@ -520,7 +809,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (nombreTabla.equals("Categories")) {
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
                     stmt2.executeUpdate("ALTER TABLE categories DISABLE KEYS;");
-                    stmt2.executeUpdate("DELETE FROM categories where CategoriID =" + oldValue + ";");
+                    stmt2.executeUpdate("DELETE FROM categories where CategoryID =" + oldValue + ";");
                     stmt2.executeUpdate("ALTER TABLE categories ENABLE KEYS;");
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
                     stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
@@ -534,7 +823,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (nombreTabla.equals("CustomerDemographics")) {
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
                     stmt2.executeUpdate("ALTER TABLE customerdemographics DISABLE KEYS;");
-                    stmt2.executeUpdate("DELETE FROM customerdemographicsn where CutomerTypeID =" + oldValue + ";");
+                    stmt2.executeUpdate("DELETE FROM customerdemographics where CustomerTypeID =" + oldValue + ";");
                     stmt2.executeUpdate("ALTER TABLE customerdemographics ENABLE KEYS;");
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
                     stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
@@ -559,7 +848,7 @@ public class Main extends javax.swing.JFrame {
                     stmt2.executeUpdate("ALTER TABLE employessterritories ENABLE KEYS;");
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
                     stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
-                } else if (nombreTabla.equals("OrderDetails")) {
+                } else if (nombreTabla.equals("Order Details")) {
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
                     stmt2.executeUpdate("ALTER TABLE orderdetails DISABLE KEYS;");
                     stmt2.executeUpdate("DELETE FROM orderdetails where OrderID =" + oldValue + ";");
@@ -584,7 +873,7 @@ public class Main extends javax.swing.JFrame {
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
                     stmt2.executeUpdate("ALTER TABLE suppliers DISABLE KEYS;");
                     stmt2.executeUpdate("DELETE FROM suppliers where SupplierID =" + oldValue + ";");
-                    stmt2.executeUpdate("ALTER TABLE supliers ENABLE KEYS;");
+                    stmt2.executeUpdate("ALTER TABLE suppliers ENABLE KEYS;");
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
                     stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
                 } else if (nombreTabla.equals("Territories")) {
@@ -598,7 +887,7 @@ public class Main extends javax.swing.JFrame {
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
                     stmt2.executeUpdate("ALTER TABLE shippers DISABLE KEYS;");
                     stmt2.executeUpdate("DELETE FROM shippers where ShipperID =" + oldValue + ";");
-                    stmt2.executeUpdate("ALTER TABLE shipers ENABLE KEYS;");
+                    stmt2.executeUpdate("ALTER TABLE shippers ENABLE KEYS;");
                     stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
                     stmt3.execute("Update TB_Bitacora set Copied = 1 where TableID =" + TableID);
                 }
@@ -659,15 +948,9 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Main.ConectarseSQL();
-                try {
-                    Main.ConectarseMySQL();
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(Main.class
-                            .getName()).log(Level.SEVERE, null, ex);
-                }
                 new Main().setVisible(true);
+
             }
         });
 
@@ -675,46 +958,104 @@ public class Main extends javax.swing.JFrame {
 
     public void limpiartabla1() {
         DefaultTableModel tabla1 = new DefaultTableModel();
-        tabla1.addColumn("tb_id");
-        tabla1.addColumn("tb_nombre");
-        tabla1.addColumn("tb_replicando");
+        tabla1.addColumn("ID de Tabla");
+        tabla1.addColumn("Nombre de la Tabla");
         this.tb_SQLServertables.setModel(tabla1);
 
     }
 
-    public static void ConectarseSQL() {
+    public void ConectarseSQL(String instancia, String Databasename, String User, String Password) {
+
         try {
-            String connectionUrl = "jdbc:sqlserver://;database=Northwind;integratedSecurity=true;";
-            conectSQL = (Connection) DriverManager.getConnection(connectionUrl);
-            System.out.println("Conectado a SQL server");
+            if (instancia.equals("SQL Server") && Databasename.equals("Northwind") && User.equals("localhost") && Password.equals("1234")) {
+                String connectionUrl = "jdbc:sqlserver://;database=Northwind;integratedSecurity=true;";
+                conectSQL = (Connection) DriverManager.getConnection(connectionUrl);
+                JOptionPane.showMessageDialog(null, "Conectado a SQL");
+                this.btn_probarSQL.setBackground(Color.green);
+                flag1 = true;
+                if (flag1 && flag2) {
+                    System.out.println("hola111111111111");
+                    this.jButton2.setEnabled(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, verifique los datos");
+                this.btn_probarSQL.setBackground(Color.red);
+                this.jButton2.setEnabled(false);
+                flag1 = false;
+                limpiartabla1();
+                SetAlltonotReplicando();
+                this.Ta_tablasReplicandose.setText("");
+
+            }
+
         } catch (SQLException ex) {
             System.out.println("Error.");
         }
 
     }
 
-    public static void ConectarseMySQL() throws SQLException {
+    public void ConectarseMySQL(String instancia, String Databasename, String User, String Password) throws SQLException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Driver mySQL cargado");
-            connectMySQL = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind?useTimezone=true&serverTimezone=UTC", "root", "1234");
-            System.out.println("Conectado a MySQL");
+            if (instancia.equals("MySQL") && Databasename.equals("northwind") && User.equals("root") && Password.equals("1234")) {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connectMySQL = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/northwind?useTimezone=true&serverTimezone=UTC", "root", "1234");
+                JOptionPane.showMessageDialog(null, "Conectado a MySQL");
+                this.btn_probarMySQL.setBackground(Color.green);
+                flag2 = true;
+                if (flag1 && flag2) {
+                    System.out.println("hola22222222222222222");
+                    this.jButton2.setEnabled(true);
+                }
+
+            }
+
         } catch (ClassNotFoundException ex) {
-            System.out.println(ex.toString());
+            JOptionPane.showMessageDialog(null, "Error, verifique los datos");
+            this.btn_probarMySQL.setBackground(Color.red);
+            this.jButton2.setEnabled(false);
+            flag2 = false;
+            limpiartabla1();
+            SetAlltonotReplicando();
+            this.Ta_tablasReplicandose.setText("");
+
         }
     }
 
     static Connection conectSQL, connectMySQL;
     static int tablaSeleccionada = 0;
+    boolean flag1, flag2 = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_replicar;
+    private javax.swing.JPanel Panel_operaciones;
     private javax.swing.JTextArea Ta_tablasReplicandose;
     private javax.swing.JButton btn_limpiarSeleccion;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_probarMySQL;
+    private javax.swing.JButton btn_probarSQL;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPasswordField pf_PassMySQL;
+    private javax.swing.JPasswordField pf_passwordSql;
     private javax.swing.JTable tb_SQLServertables;
+    private javax.swing.JTextField tf_instanciaMySQL;
+    private javax.swing.JTextField tf_instanciaSQL;
+    private javax.swing.JTextField tf_nombrebdMySQL;
+    private javax.swing.JTextField tf_nombrebdSql;
+    private javax.swing.JTextField tf_nombreuserMySQL;
+    private javax.swing.JTextField tf_nombreuserSql;
     // End of variables declaration//GEN-END:variables
 }
