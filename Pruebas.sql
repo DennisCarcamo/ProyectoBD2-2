@@ -48,7 +48,7 @@ Delete from Region where RegionID=583
 ------------------------Pruebas para Categorias-----------------------------------
 
 SET IDENTITY_INSERT Categories ON
-insert into Categories (CategoryID,CategoryName,Description) values(2500,'Agricultura','Categorias de Prueba 1')
+insert into Categories (CategoryID,CategoryName,Description) values(3000,'Confites','Categorias de Prueba 1')
 SET IDENTITY_INSERT Categories OFF
 
 
@@ -62,7 +62,7 @@ insert into Categories (CategoryID,CategoryName,Description) values(2502,'Agricu
 
 Update Categories set CategoryName='Ganaderia' where CategoryID= 2501
 
-delete from Categories where CategoryID=2501
+delete from Categories where CategoryID=3000
 -------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------
 
@@ -86,19 +86,10 @@ insert into Customers(CustomerID,CompanyName,ContactName,ContactTitle,Address,Ci
 --------------------------------------------------------------------------------------------
 
 
-
----------------------------------------------------------------------------------------------
---------------------------------------Pruebas para Employees---------------------------------
-
-
----------------------------------------------------------------------------------------------
-
-
-
 ----------------------------------------------------------------------------------------------
 -------------------------------------Prueba de OrderDetails-----------------------------------
 ALTER TABLE OrderDetails NOCHECK CONSTRAINT ALL
-Insert into OrderDetails(OrderID,ProductID,UnitPrice,Quantity,Discount) values(123,1234,12.21,123,123) 
+Insert into OrderDetails(OrderID,ProductID,UnitPrice,Quantity,Discount) values(128,1234,12.21,123,123) 
 ALTER TABLE OrderDetails CHECK CONSTRAINT ALL
 
 ALTER TABLE OrderDetails NOCHECK CONSTRAINT ALL
@@ -106,7 +97,7 @@ Update OrderDetails set UnitPrice=11111 values(123,1234,12.21,123,123)
 ALTER TABLE OrderDetails CHECK CONSTRAINT ALL
 
 ALTER TABLE OrderDetails NOCHECK CONSTRAINT ALL
-delete from OrderDetails where OrderID=123 
+delete from OrderDetails where OrderID=128 
 ALTER TABLE OrderDetails CHECK CONSTRAINT ALL
 
 ------------------------------------------------------------------------------------------------
@@ -116,7 +107,7 @@ ALTER TABLE OrderDetails CHECK CONSTRAINT ALL
 
 SET IDENTITY_INSERT Products ON
 insert into Products(ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued) 
-	values(500,'Celulares',1,3,'25',20.5,52,20,3,1);
+	values(510,'Pan',1,3,'25',20.5,52,20,3,1);
 SET IDENTITY_INSERT Products OFF
 
 

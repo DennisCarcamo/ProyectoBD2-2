@@ -445,6 +445,7 @@ public class Main extends javax.swing.JFrame {
                 System.out.println(listatablasReplicandose.get(i));
                 RevisarBitacora(listatablasReplicandose.get(i));
             }
+            JOptionPane.showMessageDialog(null, "Base de Datos Actualizada!");
         } catch (Exception e) {
 
         }
@@ -499,6 +500,7 @@ public class Main extends javax.swing.JFrame {
                 dataEntrante[4] = TableID_local;
                 dataEntrante[5] = ActionType_local;*/
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
